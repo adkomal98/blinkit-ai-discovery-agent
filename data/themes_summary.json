@@ -1,0 +1,366 @@
+{
+  "version": "2026-07-24",
+  "pipeline": "hybrid-3tier",
+  "generatedAt": "2026-07-24",
+  "product": "Blinkit",
+  "windowStart": "2026-06-09",
+  "windowEnd": "2026-07-21",
+  "totalReviews": 20045,
+  "totalClean": 3734,
+  "totalNoise": 16311,
+  "totalSampled": 2000,
+  "totalClassified": 2000,
+  "avgRating": 4.14,
+  "themes": [
+    {
+      "id": "ux_navigation",
+      "name": "UX, Search & Recommendations",
+      "bucket": "C",
+      "blurb": "Poor app navigation, clunky search, missing category browsing, and irrelevant recommendations directly block users from discovering and exploring new categories.",
+      "questionItAnswers": "How does the UI/UX enable or block category discovery?",
+      "volume": 461,
+      "percentage": 53,
+      "avgRating": 3.9,
+      "sentiment": {
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 461
+      },
+      "behaviorType": {
+        "complaint": 461,
+        "feature_request": 0,
+        "praise": 0,
+        "question": 0,
+        "narrative": 0
+      },
+      "topQuotes": [
+        {
+          "text": "no kannada in Bengaluru. It appears you don't need Kannadigas business.",
+          "rating": 1,
+          "date": "2026-07-16",
+          "theme": "UX, Search & Recommendations",
+          "source": "google_play"
+        },
+        {
+          "text": "The images shown for products in the app are often very different from what actually gets delivered. Especially for fruits and vegetables. The tomatoes in the picture look farm-fresh but what arrives is often bruised and old.",
+          "rating": 2,
+          "date": "2026-06-29",
+          "theme": "UX, Search & Recommendations",
+          "source": "mouthshut"
+        },
+        {
+          "text": "I've noticed Blinkit keeps adding new categories like electronics, toys, and even printing services. The selection in new categories is still limited but it's interesting to see them expand beyond groceries. Tried the printing service and it was decent.",
+          "rating": 3,
+          "date": "2026-06-19",
+          "theme": "UX, Search & Recommendations",
+          "source": "reddit"
+        },
+        {
+          "text": "Dont purchase eating items from here like dryfruits, fruits",
+          "rating": 1,
+          "date": "2026-07-19",
+          "theme": "UX, Search & Recommendations",
+          "source": "google_play"
+        }
+      ]
+    },
+    {
+      "id": "trust_deficit",
+      "name": "Trust & Risk Deficit",
+      "bucket": "A",
+      "blurb": "Users fear trying new categories due to quality concerns, damaged/expired items, unfamiliar brands, and difficult return/refund processes.",
+      "questionItAnswers": "What stops users from taking the first step into a new category?",
+      "volume": 218,
+      "percentage": 25,
+      "avgRating": 1.6,
+      "sentiment": {
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 218
+      },
+      "behaviorType": {
+        "complaint": 218,
+        "feature_request": 0,
+        "praise": 0,
+        "question": 0,
+        "narrative": 0
+      },
+      "topQuotes": [
+        {
+          "text": "Incorrect order being delivered in the packaging. Pathetic customer service. No customer redressal mechanism. No quality checks shared. In short once you place an order you don't have any other option but to just accept this whatever is delivered to you. absolutely pathetic.",
+          "rating": 1,
+          "date": "2026-07-12",
+          "theme": "Trust & Risk Deficit",
+          "source": "google_play"
+        },
+        {
+          "text": "The quality of products varies a lot depending on which dark store serves your area. When I order from my home, the products are great. But at my office location, the same products come in poor condition. Very inconsistent.",
+          "rating": 2,
+          "date": "2026-06-18",
+          "theme": "Trust & Risk Deficit",
+          "source": "mouthshut"
+        },
+        {
+          "text": "Ordered a USB cable and earphones from Blinkit. The quality was okay for the price. Wouldn't buy expensive electronics here but for accessories and small items it's convenient. The return policy for electronics is unclear though.",
+          "rating": 3,
+          "date": "2026-06-14",
+          "theme": "Trust & Risk Deficit",
+          "source": "reddit"
+        },
+        {
+          "text": "easy to order but vegetable quality very poor",
+          "rating": 3,
+          "date": "2026-07-19",
+          "theme": "Trust & Risk Deficit",
+          "source": "google_play"
+        }
+      ]
+    },
+    {
+      "id": "price_perception",
+      "name": "Price Perception Barrier",
+      "bucket": "A",
+      "blurb": "Users perceive non-grocery categories as overpriced compared to Amazon, Flipkart, local stores, or competitors like Zepto/BigBasket. Lack of first-time deals discourages trial.",
+      "questionItAnswers": "Is pricing a primary hurdle for cross-category exploration?",
+      "volume": 157,
+      "percentage": 18,
+      "avgRating": 2.8,
+      "sentiment": {
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 157
+      },
+      "behaviorType": {
+        "complaint": 157,
+        "feature_request": 0,
+        "praise": 0,
+        "question": 0,
+        "narrative": 0
+      },
+      "topQuotes": [
+        {
+          "text": "Blinkit is super convenient for daily essentials and snacks. But they really need to expand their categories. I wish they had more variety in pet supplies, baby products, and personal care items. Currently I have to go to Amazon or local stores for those.",
+          "rating": 4,
+          "date": "2026-07-08",
+          "theme": "Price Perception Barrier",
+          "source": "mouthshut"
+        },
+        {
+          "text": "I've noticed that prices on Blinkit change during the day. Items can be cheaper in the morning and more expensive during peak evening hours. It feels like surge pricing for groceries. Not cool.",
+          "rating": 3,
+          "date": "2026-06-09",
+          "theme": "Price Perception Barrier",
+          "source": "reddit"
+        },
+        {
+          "text": "They lost the two stars because of their surge price. Some items are delivered without a carrybag though they charge Handling fee.",
+          "rating": 3,
+          "date": "2026-07-17",
+          "theme": "Price Perception Barrier",
+          "source": "google_play"
+        },
+        {
+          "text": "dissatisfied with product options like small quantity is not available and heavy price sangam standardised milk not showing in this app, can't we get it ??",
+          "rating": 3,
+          "date": "2026-07-18",
+          "theme": "Price Perception Barrier",
+          "source": "google_play"
+        }
+      ]
+    },
+    {
+      "id": "information_scarcity",
+      "name": "Information Scarcity",
+      "bucket": "A",
+      "blurb": "Users lack the information needed to make purchase decisions in unfamiliar categories — insufficient product details, missing reviews, no brand guidance.",
+      "questionItAnswers": "What information is missing before users commit to a new category?",
+      "volume": 15,
+      "percentage": 2,
+      "avgRating": 2.4,
+      "sentiment": {
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 15
+      },
+      "behaviorType": {
+        "complaint": 15,
+        "feature_request": 0,
+        "praise": 0,
+        "question": 0,
+        "narrative": 0
+      },
+      "topQuotes": [
+        {
+          "text": "I use Blinkit for office supplies but they don't provide proper GST invoices. The receipts are basic and don't have the details needed for business expense claims. This limits its usefulness for business purchasing.",
+          "rating": 2,
+          "date": "2026-06-11",
+          "theme": "Information Scarcity",
+          "source": "reddit"
+        },
+        {
+          "text": "this app is very good and the product given by them is also of real brand and information of the product is also real . I like it sooo muchhh 💖💖",
+          "rating": 5,
+          "date": "2026-07-21",
+          "theme": "Information Scarcity",
+          "source": "google_play"
+        },
+        {
+          "text": "Worst app. Worst services. If any product is faulty then they won't resolve your complain infact they would ask you to contact the brand without taking any accountability. please use instamart or other websites. this app is the worst",
+          "rating": 1,
+          "date": "2026-07-19",
+          "theme": "Information Scarcity",
+          "source": "google_play"
+        },
+        {
+          "text": "assured gift with purchased item is not delivered, informed that it is not possible to give free gift as it is not in stock and neither cancelling order . It is cheating with costomer.",
+          "rating": 1,
+          "date": "2026-07-18",
+          "theme": "Information Scarcity",
+          "source": "google_play"
+        }
+      ]
+    },
+    {
+      "id": "discovery_difficulty",
+      "name": "Discovery Difficulty",
+      "bucket": "A",
+      "blurb": "Users are unaware Blinkit offers categories beyond groceries. Discovery is accidental, search is poor, and recommendations are absent or irrelevant.",
+      "questionItAnswers": "Why can't users find new categories?",
+      "volume": 9,
+      "percentage": 1,
+      "avgRating": 4.1,
+      "sentiment": {
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 9
+      },
+      "behaviorType": {
+        "complaint": 9,
+        "feature_request": 0,
+        "praise": 0,
+        "question": 0,
+        "narrative": 0
+      },
+      "topQuotes": [
+        {
+          "text": "I didn't know Blinkit had pet supplies! Just discovered they carry dog food and treats. The selection is small but being able to get pet food delivered in 10 minutes when you run out is amazing. Hope they expand this category.",
+          "rating": 4,
+          "date": "2026-06-21",
+          "theme": "Discovery Difficulty",
+          "source": "reddit"
+        },
+        {
+          "text": "the app is very good and helpful, i couldn't find this product at the shop however I placed it through the blinkit.",
+          "rating": 5,
+          "date": "2026-07-20",
+          "theme": "Discovery Difficulty",
+          "source": "google_play"
+        },
+        {
+          "text": "great things I can't find in market easily are available in one finger tap 😉",
+          "rating": 5,
+          "date": "2026-07-19",
+          "theme": "Discovery Difficulty",
+          "source": "google_play"
+        },
+        {
+          "text": "It is difficult to find the cancel button of search order in interface",
+          "rating": 5,
+          "date": "2026-07-18",
+          "theme": "Discovery Difficulty",
+          "source": "google_play"
+        }
+      ]
+    },
+    {
+      "id": "decision_fatigue",
+      "name": "Time Constraints & Decision Fatigue",
+      "bucket": "B",
+      "blurb": "Users face cognitive overload when trying to evaluate unfamiliar products, leading them to default to known categories rather than explore.",
+      "questionItAnswers": "What psychological barriers prevent exploration even when users are aware of new categories?",
+      "volume": 5,
+      "percentage": 1,
+      "avgRating": 3.6,
+      "sentiment": {
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 5
+      },
+      "behaviorType": {
+        "complaint": 5,
+        "feature_request": 0,
+        "praise": 0,
+        "question": 0,
+        "narrative": 0
+      },
+      "topQuotes": [
+        {
+          "text": "before there were not many options to buy from now it has everything you can think of ❤️❤️",
+          "rating": 5,
+          "date": "2026-07-19",
+          "theme": "Time Constraints & Decision Fatigue",
+          "source": "google_play"
+        },
+        {
+          "text": "very good app..many gifting options also available here only but not much options for coupons",
+          "rating": 4,
+          "date": "2026-07-17",
+          "theme": "Time Constraints & Decision Fatigue",
+          "source": "google_play"
+        },
+        {
+          "text": "I choose gift 🎁 pack option paid extra but they deleverdy in open bag",
+          "rating": 1,
+          "date": "2026-07-13",
+          "theme": "Time Constraints & Decision Fatigue",
+          "source": "google_play"
+        },
+        {
+          "text": "multiple options for each items👏👏",
+          "rating": 5,
+          "date": "2026-07-13",
+          "theme": "Time Constraints & Decision Fatigue",
+          "source": "google_play"
+        }
+      ]
+    },
+    {
+      "id": "shopping_rigidity",
+      "name": "Shopping Rigidity & Habit Lock-in",
+      "bucket": "B",
+      "blurb": "Users are locked into repeat-buying the same categories due to strong habit loops, reorder convenience, time constraints, and cognitive overload.",
+      "questionItAnswers": "How are habits locked in, and how can we break them?",
+      "volume": 1,
+      "percentage": 0,
+      "avgRating": 1,
+      "sentiment": {
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 1
+      },
+      "behaviorType": {
+        "complaint": 1,
+        "feature_request": 0,
+        "praise": 0,
+        "question": 0,
+        "narrative": 0
+      },
+      "topQuotes": [
+        {
+          "text": "could not take my gpay. wasted an hour and reordered. hope order not duplicated.",
+          "rating": 1,
+          "date": "2026-07-11",
+          "theme": "Shopping Rigidity & Habit Lock-in",
+          "source": "google_play"
+        }
+      ]
+    }
+  ]
+}

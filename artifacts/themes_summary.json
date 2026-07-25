@@ -1,0 +1,226 @@
+{
+  "product": "Blinkit",
+  "generatedAt": "2026-07-24",
+  "windowStart": "2026-06-09",
+  "windowEnd": "app_version",
+  "totalReviews": 20050,
+  "themes": [
+    {
+      "id": "trust_risk",
+      "name": "Trust & Risk",
+      "blurb": "Quality concerns, unfamiliar brands, and return/refund worries stop users from taking the first step into non-grocery categories.",
+      "count": 1063,
+      "share": 0.40204236006051436,
+      "avgRating": 1.9821260583254938,
+      "sampleQuotes": [
+        {
+          "text": "The quality of products on Blinkit has been deteriorating over the past few months. Items arrive damaged, packaging is poor, and customer support is unhelpful. They refuse refunds even when items are clearly defective.",
+          "rating": 2,
+          "date": "2026-07-14",
+          "theme": "Trust & Risk",
+          "source": "reddit"
+        },
+        {
+          "text": "Ordered groceries and received expired products. When I raised a complaint, they only offered replacement instead of refund. The replacement also came with issues. Customer support just keeps saying the same scripted responses.",
+          "rating": 2,
+          "date": "2026-07-13",
+          "theme": "Trust & Risk",
+          "source": "mouthshut"
+        },
+        {
+          "text": "customer care is not helpful.. expiry or damage product are given but no replacement no return.. disgusting i already shared order id and images of the product to above mentioned email... but no replacement and no refund i get",
+          "rating": 1,
+          "date": "2026-07-10",
+          "theme": "Trust & Risk",
+          "source": "google_play"
+        }
+      ]
+    },
+    {
+      "id": "habit_formation",
+      "name": "Habit Formation",
+      "blurb": "Users are locked into re-ordering past items due to time-scarcity and cognitive overload, treating Blinkit strictly as a grocery app.",
+      "count": 984,
+      "share": 0.3721633888048411,
+      "avgRating": 4.762195121951219,
+      "sampleQuotes": [
+        {
+          "text": "within no time I received my order more faster than swiggy orany other delivery app. the delivery agent amwas so fast just 7 minutes I received my order.. although this was my first trail but looking forward for more.. than you blinkit",
+          "rating": 5,
+          "date": "2026-07-16",
+          "theme": "Habit Formation",
+          "source": "google_play"
+        },
+        {
+          "text": "Excellent service! My order was delivered very quickly, and all the products were fresh and well packed. The app is easy to use, and the delivery partner was polite and professional. Highly recommended for fast and hassle-free shopping.",
+          "rating": 5,
+          "date": "2026-07-21",
+          "theme": "Habit Formation",
+          "source": "google_play"
+        },
+        {
+          "text": "I had ordered biscuits but all are like smaash, few months back also I had ordered that also same things, I hv ordered for somebody n don't hv time to replace or raise complaint.",
+          "rating": 1,
+          "date": "2026-07-19",
+          "theme": "Habit Formation",
+          "source": "google_play"
+        }
+      ]
+    },
+    {
+      "id": "price_sensitivity",
+      "name": "Price Sensitivity",
+      "blurb": "New categories are perceived as expensive, and a lack of first-time deals prevents exploration.",
+      "count": 414,
+      "share": 0.15658093797276854,
+      "avgRating": 3.0676328502415457,
+      "sampleQuotes": [
+        {
+          "text": "Blinkit shows MRP prices as original and their selling price as discounted. But when you check the same product at a local store, the MRP itself is lower. They inflate MRP to show fake discounts. Very deceptive pricing strategy.",
+          "rating": 1,
+          "date": "2026-06-27",
+          "theme": "Price Sensitivity",
+          "source": "reddit"
+        },
+        {
+          "text": "price to high no discount coupon like zepto give us",
+          "rating": 1,
+          "date": "2026-07-18",
+          "theme": "Price Sensitivity",
+          "source": "google_play"
+        },
+        {
+          "text": "Blinkit is good when you need something urgently. But the prices are significantly higher than local stores and even other apps. The convenience comes at a steep premium. Would not recommend for regular grocery shopping.",
+          "rating": 3,
+          "date": "2026-07-11",
+          "theme": "Price Sensitivity",
+          "source": "mouthshut"
+        }
+      ]
+    },
+    {
+      "id": "discovery_barriers",
+      "name": "Discovery Barriers",
+      "blurb": "Users cannot find new categories due to bad search results, irrelevant recommendations, or categories being hidden deep in the UI.",
+      "count": 70,
+      "share": 0.0264750378214826,
+      "avgRating": 2.7285714285714286,
+      "sampleQuotes": [
+        {
+          "text": "the product we search is not showing and showing other product 😑",
+          "rating": 4,
+          "date": "2026-07-22",
+          "theme": "Discovery Barriers",
+          "source": "google_play"
+        },
+        {
+          "text": "the things i searched were always out of stock and delivery charges very high and the things i search were not showing",
+          "rating": 1,
+          "date": "2026-07-10",
+          "theme": "Discovery Barriers",
+          "source": "google_play"
+        },
+        {
+          "text": "Ordered late at night and the delivery partner called saying he couldn't find the address. I had to go outside to meet him. As a woman living alone, this felt unsafe. The app should have better navigation for delivery partners.",
+          "rating": 1,
+          "date": "2026-06-10",
+          "theme": "Discovery Barriers",
+          "source": "reddit"
+        }
+      ]
+    },
+    {
+      "id": "category_signals",
+      "name": "Category Signals",
+      "blurb": "Specific mentions of latent demand and friction in non-core categories like Pet, Personal Care, and Baby supplies.",
+      "count": 52,
+      "share": 0.019667170953101363,
+      "avgRating": 3.5576923076923075,
+      "sampleQuotes": [
+        {
+          "text": "Blinkit is super convenient for daily essentials and snacks. But they really need to expand their categories. I wish they had more variety in pet supplies, baby products, and personal care items. Currently I have to go to Amazon or local stores for those.",
+          "rating": 4,
+          "date": "2026-07-08",
+          "theme": "Category Signals",
+          "source": "mouthshut"
+        },
+        {
+          "text": "Blinkit has good groceries but their personal care and beauty section is very limited. Only 2-3 brands for most categories. I end up ordering from Amazon for skincare and haircare. If they expanded, I'd happily buy everything from one place.",
+          "rating": 3,
+          "date": "2026-06-23",
+          "theme": "Category Signals",
+          "source": "mouthshut"
+        },
+        {
+          "text": "Very fast delivery, often within 10–20 minutes in supported areas. Wide selection of groceries, fruits, dairy, medicines, personal care items, and even electronics. 😎",
+          "rating": 5,
+          "date": "2026-07-18",
+          "theme": "Category Signals",
+          "source": "google_play"
+        }
+      ]
+    },
+    {
+      "id": "information_needs",
+      "name": "Information Needs",
+      "blurb": "Missing details like product specs, user reviews, or price comparisons leave users without the information they need to commit.",
+      "count": 38,
+      "share": 0.014372163388804841,
+      "avgRating": 2.526315789473684,
+      "sampleQuotes": [
+        {
+          "text": "Delivered product with half the amount as shown in product details, when inquired they are saying that there may be some discrepancy in image shown and delivered items. Final update : got compensated for the half after nearly 48hr",
+          "rating": 3,
+          "date": "2026-07-12",
+          "theme": "Information Needs",
+          "source": "google_play"
+        },
+        {
+          "text": "The images shown for products in the app are often very different from what actually gets delivered. Especially for fruits and vegetables. The tomatoes in the picture look farm-fresh but what arrives is often bruised and old.",
+          "rating": 2,
+          "date": "2026-06-29",
+          "theme": "Information Needs",
+          "source": "mouthshut"
+        },
+        {
+          "text": "I use Blinkit for office supplies but they don't provide proper GST invoices. The receipts are basic and don't have the details needed for business expense claims. This limits its usefulness for business purchasing.",
+          "rating": 2,
+          "date": "2026-06-11",
+          "theme": "Information Needs",
+          "source": "reddit"
+        }
+      ]
+    },
+    {
+      "id": "ux_navigation",
+      "name": "UX Navigation",
+      "blurb": "Clunky search, poor category browsing, and hidden promo visibility block discovery within the app UI.",
+      "count": 23,
+      "share": 0.00869894099848714,
+      "avgRating": 3.652173913043478,
+      "sampleQuotes": [
+        {
+          "text": "The \"view cart\" page should give arrow-button to collapse the looong scroll of recommended items. v18.9.3 Can't apply sort & filter together. Sharing collections (like say boAt) shares incomplete link. v17.99.1",
+          "rating": 4,
+          "date": "2026-07-11",
+          "theme": "UX Navigation",
+          "source": "google_play"
+        },
+        {
+          "text": "improve customer support please remove bot customer support, ui/ux is good, availability of items is nice",
+          "rating": 4,
+          "date": "2026-07-18",
+          "theme": "UX Navigation",
+          "source": "google_play"
+        },
+        {
+          "text": "this is a nice application ui (user interface) nice service",
+          "rating": 5,
+          "date": "2026-07-10",
+          "theme": "UX Navigation",
+          "source": "google_play"
+        }
+      ]
+    }
+  ]
+}
