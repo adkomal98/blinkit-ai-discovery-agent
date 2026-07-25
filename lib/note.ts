@@ -10,9 +10,9 @@ export async function buildWeeklyNote(reviews: Review[], generatedAt: string): P
   const rated = reviews.filter((r) => r.rating > 0);
   const avgRating = rated.reduce((a, r) => a + r.rating, 0) / (rated.length || 1);
   const dates = reviews.map((r) => r.date).filter(Boolean).sort();
-  
+
   const allThemes = summariseThemes(reviews);
-  
+
   // We need exactly 1 quote from each of the 5 themes (if available)
   const quotes: Quote[] = [];
   for (const t of allThemes) {
@@ -21,9 +21,9 @@ export async function buildWeeklyNote(reviews: Review[], generatedAt: string): P
     }
   }
 
-  const headline = allThemes.length > 0 
-    ? `Overall ${round(avgRating, 2)}★; cross-category discovery signals this week centre on ${allThemes.slice(0, 2).map((t) => t.name).join(" and ")}.`
-    : `${PRODUCT} reviews are stable this week.`;
+  const headline = allThemes.length > 0
+    ? `Cross-category discovery signals in this batch centre around ${allThemes.slice(0, 2).map((t) => t.name).join(" and ")}.`
+    : `${PRODUCT} reviews are stable this batch.`;
 
   return {
     product: PRODUCT,

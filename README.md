@@ -7,7 +7,7 @@ This project aggregates, classifies, and analyzes thousands of cross-platform us
 ## ✨ Features
 
 - **Automated Data Pipeline**: Scrapes public reviews from Google Play, App Store, and social platforms, parsing out PII and standardizing the schema.
-- **Strategic Theme Classification**: A deterministic NLP engine that categorizes raw reviews into 7 strategic discovery themes (e.g., *Trust & Risk*, *Habit Formation*, *Price Sensitivity*).
+- **Hybrid Theme Classification**: A dual-engine classifier that uses Groq/Llama 3.1 LLM for nuanced classification of a 500-review sample, with deterministic keyword matching as fallback for all 20,000+ reviews. Categorizes into 5 strategic discovery themes.
 - **Discovery Pulse Dashboard**: A beautifully designed 50/50 split UI that presents a weekly summary of themes alongside real verbatim user quotes.
 - **AI FAQ Assistant (Gemini)**: An integrated chatbot that answers questions strictly based on the extracted offline dataset, preventing hallucinations and ensuring facts-only insights.
 
@@ -29,6 +29,7 @@ npm install
 Create a `.env.local` file in the root directory and add your Google Gemini API key:
 ```env
 GEMINI_API_KEY="your_api_key_here"
+GROQ_API_KEY="your_groq_api_key_here"
 ```
 
 ### 3. Fetch Data & Generate Insights
@@ -39,7 +40,7 @@ Fetch the latest reviews (this will pull up to 20,000 reviews from Google Play/A
 npm run fetch:reviews
 ```
 
-Categorize those reviews into the 7 strategic themes (generates `artifacts/themes_summary.json`):
+Categorize those reviews into the 5 strategic themes (runs LLM classifier first, then generates `artifacts/themes_summary.json`):
 ```bash
 npm run generate:note
 ```
@@ -59,15 +60,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - `/data` - Raw and compiled `.csv` review datasets.
 - `/artifacts` - Generated JSON summaries that power the frontend UI.
 
-## 📈 The 7 Strategic Themes
+## 📈 The 5 Strategic Themes
 The engine specifically hunts for reviews matching these strategic buckets:
-1. **Discovery Barriers**: UI/UX hiding categories or bad search.
-2. **Trust & Risk**: Quality concerns and return worries.
-3. **Habit Formation**: Blind re-ordering and cognitive overload.
-4. **Information Needs**: Missing specs or user reviews.
-5. **Price Sensitivity**: High perceived markup on non-grocery items.
-6. **UX Navigation**: Clunky browsing experiences.
-7. **Category Signals**: Latent demand for specific new categories.
+1. **Trust & Risk**: Quality concerns, unfamiliar brands, and return/refund worries.
+2. **Habit Formation**: Re-ordering lock-in, time-scarcity, and cognitive overload.
+3. **Price Sensitivity**: New categories perceived as expensive, lack of first-time deals.
+4. **Discovery & UX Gaps**: Bad search, hidden categories, poor browsing, missing product info.
+5. **Category Signals**: Latent demand for non-core categories (Pet, Baby, Electronics, etc.).
 
 ## 🤝 Deployment
 This app is designed to be statically deployed on platforms like **Vercel** or **Netlify**. For automated production updates, set up a GitHub Action cron job to run `fetch:reviews` and `generate:note` weekly.

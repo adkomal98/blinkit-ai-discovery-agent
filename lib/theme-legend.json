@@ -1,14 +1,7 @@
 {
-  "version": "2026-07-24",
-  "note": "7 themes aligned with the strategic goal: Increase cross-category buyers.",
+  "version": "2026-07-25",
+  "note": "5 themes aligned with the strategic goal: Increase cross-category buyers.",
   "themes": [
-    {
-      "id": "discovery_barriers",
-      "name": "Discovery Barriers",
-      "blurb": "Users cannot find new categories due to bad search results, irrelevant recommendations, or categories being hidden deep in the UI.",
-      "question": "Why can't users find new categories?",
-      "keywords": ["search", "results", "recommend", "recommendation", "hidden", "hard to find", "couldn't find", "didn't show", "missing category", "irrelevant", "not showing", "search bar", "didn't know you had"]
-    },
     {
       "id": "trust_risk",
       "name": "Trust & Risk",
@@ -24,13 +17,6 @@
       "keywords": ["reorder", "past order", "repeat", "usual", "habit", "routine", "quickly", "in a rush", "no time", "too many options", "overwhelmed", "just need milk", "regular order", "same things", "fast", "hurry"]
     },
     {
-      "id": "information_needs",
-      "name": "Information Needs",
-      "blurb": "Missing details like product specs, user reviews, or price comparisons leave users without the information they need to commit.",
-      "question": "What information is missing before they commit?",
-      "keywords": ["details", "specs", "specification", "description", "missing info", "no reviews", "no ratings", "compare", "not enough info", "dimensions", "ingredients", "manual", "unclear", "picture", "photo", "blurry"]
-    },
-    {
       "id": "price_sensitivity",
       "name": "Price Sensitivity",
       "blurb": "New categories are perceived as expensive, and a lack of first-time deals prevents exploration.",
@@ -38,11 +24,11 @@
       "keywords": ["expensive", "price", "costly", "overpriced", "markup", "discount", "deal", "offer", "coupon", "cheaper on amazon", "cheaper outside", "local store", "first time discount", "promo code"]
     },
     {
-      "id": "ux_navigation",
-      "name": "UX Navigation",
-      "blurb": "Clunky search, poor category browsing, and hidden promo visibility block discovery within the app UI.",
-      "question": "How does the UI/UX enable or block discovery?",
-      "keywords": ["ui", "ux", "interface", "clunky", "glitchy", "hard to navigate", "menu", "category page", "browsing", "layout", "confusing", "banner", "promo hidden", "app design", "scroll", "sorting", "filter", "filters"]
+      "id": "discovery_ux_gaps",
+      "name": "Discovery & UX Gaps",
+      "blurb": "Users cannot find, evaluate, or commit to new categories due to bad search results, poor category browsing, hidden promotions, and missing product information like specs, reviews, or price comparisons.",
+      "question": "Why can't users find, evaluate, and commit to new categories?",
+      "keywords": ["search", "results", "recommend", "recommendation", "hidden", "hard to find", "couldn't find", "didn't show", "missing category", "irrelevant", "not showing", "search bar", "didn't know you had", "ui", "ux", "interface", "clunky", "glitchy", "hard to navigate", "menu", "category page", "browsing", "layout", "confusing", "banner", "promo hidden", "app design", "scroll", "sorting", "filter", "filters", "details", "specs", "specification", "description", "missing info", "no reviews", "no ratings", "compare", "not enough info", "dimensions", "ingredients", "manual", "unclear", "picture", "photo", "blurry"]
     },
     {
       "id": "category_signals",

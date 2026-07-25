@@ -5,7 +5,7 @@
  * submission metrics can be regenerated without running the Next.js server:
  *   npm run generate:note
  */
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -48,7 +48,8 @@ function loadReviews() {
   const rows = parseCSV(readFileSync(join(ROOT, "data", "blinkit_reviews.csv"), "utf8"));
   const h = rows[0].map((x) => x.trim());
   const ix = (n) => h.indexOf(n);
-  return rows.slice(1).filter((r) => r.length > 1).map((r) => ({
+  return rows.slice(1).filter((r) => r.length > 1).map((r, i) => ({
+    review_id: r[ix("review_id")] || `R${String(i + 1).padStart(4, "0")}`,
     rating: Number(r[ix("rating")]) || 0,
     title: redact(r[ix("title")] || ""),
     text: redact(r[ix("text")] || ""),
@@ -69,9 +70,12 @@ function kwScore(text, keywords) {
 }
 function classify(r) {
   const text = `${r.title} ${r.text}`.toLowerCase();
-  let id = legend.fallback.id, best = 0;
-  for (const t of legend.themes) { const s = kwScore(text, t.keywords); if (s > best) { best = s; id = t.id; } }
-  return id;
+  let bestId = legend.fallback.id, best = 0;
+  for (const t of legend.themes) {
+    const s = kwScore(text, t.keywords);
+    if (s > best) { best = s; bestId = t.id; }
+  }
+  return bestId;
 }
 function pickQuotes(reviews, themeName, keywords, n) {
   const scored = reviews.map((r) => {

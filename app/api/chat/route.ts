@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { readFileSync, existsSync } from "node:fs";
+import { join } from "node:path";
 import { loadReviews } from "@/lib/reviews";
 import { summariseThemes } from "@/lib/themes";
 import { generateChatAnswer } from "@/lib/chatbot";
@@ -8,15 +10,22 @@ export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {
   try {
-    const { question } = (await req.json()) as { question: string };
+    const { question, method = "keyword" } = (await req.json()) as { question: string; method?: string };
     
     if (!question || question.trim().length === 0) {
       return NextResponse.json({ error: "Missing question." }, { status: 400 });
     }
     
-    // In a real production app, we would cache this analysis
-    // For this prototype, we load and summarise per request to keep it stateless
-    const reviews = loadReviews();
+    let reviews = loadReviews();
+
+    if (method === "llm") {
+      const llmPath = join(process.cwd(), "data", "llm_classified_sample.json");
+      if (existsSync(llmPath)) {
+        const data = JSON.parse(readFileSync(llmPath, "utf8"));
+        reviews = data.reviews;
+      }
+    }
+
     const allThemes = summariseThemes(reviews);
     
     // Generate AI response

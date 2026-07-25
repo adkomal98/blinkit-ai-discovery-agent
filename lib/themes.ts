@@ -21,6 +21,7 @@ function keywordScore(text: string, keywords: string[]): number {
 
 /** Assign a review to the best-matching theme id, or the fallback id. */
 export function classify(review: Review): string {
+  if (review.theme_id) return review.theme_id;
   const text = `${review.title} ${review.text}`.toLowerCase();
   let bestId = legend.fallback.id;
   let best = 0;

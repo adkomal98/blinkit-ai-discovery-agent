@@ -127,7 +127,7 @@ ${JSON.stringify(contextData, null, 2)}
   } catch (error) {
     console.error("Error calling Gemini API:", error);
     return {
-      answer: "Sorry, I encountered an error while analyzing the data to answer your question.",
+      answer: "There is too much traffic, please retry in 2 minutes.",
       sourceInfo: "System Error"
     };
   }

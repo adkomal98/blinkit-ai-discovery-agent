@@ -11,6 +11,7 @@ export interface Review {
   app_version: string;
   helpful_count: number;
   source: ReviewSource;
+  theme_id?: string;
 }
 
 export interface ThemeDef {

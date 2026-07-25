@@ -8,19 +8,19 @@ function ratingTone(avg: number): string {
 }
 
 const THEME_ICONS: Record<string, string> = {
-  habitual_reordering: "🔄",
-  category_discovery: "🔍",
-  product_range: "📦",
-  pricing_offers: "💰",
-  delivery_trust: "🚚",
+  trust_risk: "🛡️",
+  habit_formation: "🔁",
+  price_sensitivity: "🏷️",
+  discovery_ux_gaps: "🔍",
+  category_signals: "📦",
 };
 
 export function ThemeCard({ theme, rank }: { theme: ThemeSummary; rank: number }) {
   const icon = THEME_ICONS[theme.id] || "📊";
   return (
     <div className="card p-4">
-      <div className="flex items-start justify-between gap-3">
-        <div>
+      <div className="flex flex-col">
+        <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="flex h-7 w-7 items-center justify-center rounded-full bg-blinkit-300 text-sm font-bold text-blinkit-ink">
               {rank}
@@ -28,9 +28,9 @@ export function ThemeCard({ theme, rank }: { theme: ThemeSummary; rank: number }
             <span className="text-base">{icon}</span>
             <h3 className="font-semibold text-gray-800">{theme.name}</h3>
           </div>
-          <p className="mt-1 text-sm text-gray-500">{theme.blurb}</p>
+          <span className={cx("pill shrink-0", ratingTone(theme.avgRating))}>{theme.avgRating.toFixed(1)}★ avg</span>
         </div>
-        <span className={cx("pill shrink-0", ratingTone(theme.avgRating))}>{theme.avgRating.toFixed(1)}★ avg</span>
+        <p className="mt-2 text-sm text-gray-500">{theme.blurb}</p>
       </div>
       <div className="mt-3 flex items-center gap-4 text-sm text-gray-600">
         <span className="font-semibold text-gray-800">{theme.count}</span> reviews

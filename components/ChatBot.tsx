@@ -14,7 +14,7 @@ const SAMPLE_QUESTIONS = [
   "What unmet needs emerge consistently across discussions?"
 ];
 
-export function ChatBot() {
+export function ChatBot({ method = "keyword" }: { method?: "keyword" | "llm" }) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -44,7 +44,7 @@ export function ChatBot() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ question: q.trim() })
+        body: JSON.stringify({ question: q.trim(), method })
       });
 
       const data = await res.json() as ChatResponse;
@@ -66,7 +66,8 @@ export function ChatBot() {
       setTimeout(() => {
         setMessages(prev => [...prev, {
           role: "bot",
-          text: "Sorry, I encountered an error connecting to the discovery engine.",
+          text: "There is too much traffic, please retry in 2 minutes.",
+          isRefusal: true,
           sourceInfo: "System Error"
         }]);
         setIsTyping(false);
@@ -77,22 +78,22 @@ export function ChatBot() {
   return (
     <div className="flex h-full flex-col font-sans">
       {/* Header */}
-      <div className="flex items-center gap-3 border-b border-gray-100 bg-white p-4">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blinkit-500 text-white shadow-sm">
+      <div className="flex items-center gap-3 border-b border-blinkit-400 bg-blinkit-300 p-4">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-blinkit-500 shadow-sm">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
           </svg>
         </div>
         <div>
-          <div className="font-semibold">Discovery Insights Assistant</div>
-          <div className="text-xs text-gray-500">Ask questions about cross-category shopping behavior</div>
+          <div className="font-bold text-blinkit-ink">Discovery Insights Assistant</div>
+          <div className="text-xs font-medium text-blinkit-ink/70">Ask questions about cross-category shopping behavior</div>
         </div>
       </div>
 
 
 
       {/* Suggested Chips Accordion */}
-      <details ref={detailsRef} className="group border-b border-gray-100 bg-white">
+      <details ref={detailsRef} open className="group border-b border-gray-100 bg-white">
         <summary className="flex cursor-pointer select-none items-center justify-between p-4 text-xs font-semibold uppercase tracking-wide text-blinkit-600 transition-colors hover:bg-gray-50/50">
           <span className="flex items-center gap-2">
             <span className="relative flex h-2 w-2">
@@ -163,13 +164,6 @@ export function ChatBot() {
                 </div>
               )}
             </div>
-
-            {m.sourceInfo && (
-              <div className="mt-1 flex items-center gap-1 text-[10px] text-gray-400 pl-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-blinkit-400"></span>
-                {m.sourceInfo}
-              </div>
-            )}
           </div>
         ))}
 

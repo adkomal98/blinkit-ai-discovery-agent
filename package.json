@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "fetch:reviews": "node scripts/fetch_reviews.mjs",
+    "classify:llm": "node scripts/llm-classifier.mjs",
     "generate:note": "node scripts/generate_artifacts.mjs"
   },
   "dependencies": {

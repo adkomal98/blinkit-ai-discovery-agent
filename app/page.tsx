@@ -10,19 +10,39 @@ import { ChatBot } from "@/components/ChatBot";
 export default function Home() {
   const [data, setData] = useState<AnalyzeResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isClassifying, setIsClassifying] = useState(false);
+
+  const [method, setMethod] = useState<"keyword" | "llm">("keyword");
 
   useEffect(() => {
-    fetch("/api/analyze")
+    setData(null);
+    setError(null);
+    fetch(`/api/analyze?method=${method}`)
       .then((r) => r.json())
       .then((d) => (d.error ? setError(d.error) : setData(d)))
       .catch(() => setError("Could not load analysis."));
-  }, []);
+  }, [method]);
+
+  async function triggerLlmClassification() {
+    setIsClassifying(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/classify-llm", { method: "POST" });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      setMethod("llm");
+    } catch (e: any) {
+      setError(e.message || "Failed to run LLM classification.");
+    } finally {
+      setIsClassifying(false);
+    }
+  }
 
   return (
     <div className="flex h-screen w-full overflow-hidden bg-gray-50">
       {/* LEFT HALF */}
       <main className="w-1/2 overflow-y-auto border-r border-gray-200 bg-white p-6">
-        <header className="mb-6">
+        <header className="mb-4">
           <div className="flex items-center gap-3">
             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blinkit-300 text-lg font-black text-blinkit-ink">B</span>
             <div>
@@ -31,25 +51,34 @@ export default function Home() {
             </div>
           </div>
           <p className="mt-3 rounded-xl bg-gray-100 px-3 py-2 text-xs text-gray-500">
-            Goal: Increase % of MACs purchasing from ≥1 new category/month · Facts only from public reviews · No PII · Themes capped at 7 · Note ≤ 250 words
+            Goal: Increase % of MACs purchasing from ≥1 new category/month
           </p>
+
         </header>
 
-        {error && <Card className="border-rose-200 bg-rose-50 text-sm text-rose-700">{error}</Card>}
+        {error && <Card className="border-rose-200 bg-rose-50 text-sm text-rose-700 mb-4">{error}</Card>}
 
-        {!data && !error && (
+        {!data && !error && !isClassifying && (
           <Card className="text-center text-sm text-gray-500">Analysing multi-source Blinkit reviews for cross-category discovery signals…</Card>
         )}
 
-        {data && (
-          <div className="space-y-8">
-            <Card className="p-4 bg-gray-50/50">
-              <h2 className="text-lg font-semibold text-gray-900 mb-2">Discovery Pulse</h2>
-              <p className="text-sm text-gray-600">{data.note.headline}</p>
-              <div className="mt-4 flex gap-4 text-xs text-gray-500">
-                <span>{data.note.totalReviews} reviews analysed</span>
-                <span>Avg rating: {data.note.avgRating}★</span>
+        {isClassifying && (
+          <Card className="text-center text-sm text-gray-500">
+            <span className="animate-pulse">🧠 Please wait classifying 100 reviews... This might take about 20 seconds...</span>
+          </Card>
+        )}
+
+        {data && !isClassifying && (
+          <div className="space-y-4">
+            <Card className="!p-4 bg-gray-50/50">
+              <div className="flex items-center justify-between mb-2">
+                <h2 className="text-lg font-semibold text-gray-900">Discovery Pulse</h2>
+                <div className="flex gap-4 text-xs text-gray-500">
+                  <span className="rounded-full bg-gray-200/50 px-2.5 py-0.5">{data.note.totalReviews} reviews analysed</span>
+                  <span className="rounded-full bg-blinkit-100/50 px-2.5 py-0.5 text-blinkit-600">Avg rating: {data.note.avgRating}★</span>
+                </div>
               </div>
+              <p className="text-sm text-gray-600">{data.note.headline}</p>
             </Card>
 
             {/* <section>
@@ -63,6 +92,24 @@ export default function Home() {
                 ))}
               </div>
             </section> */}
+
+            <div className="mt-4 flex gap-2">
+              <Button
+                variant={method === "keyword" ? "primary" : "secondary"}
+                onClick={() => setMethod("keyword")}
+                className="flex-1"
+              >
+                📊 Full Dataset (Keyword Algorithm)
+              </Button>
+              <Button
+                variant={method === "llm" ? "primary" : "secondary"}
+                onClick={triggerLlmClassification}
+                className="flex-1"
+                disabled={isClassifying}
+              >
+                {isClassifying ? "🧠 Running LLM (Wait 20s)..." : "🧠 Sample Dataset (Live API)"}
+              </Button>
+            </div>
 
             <section>
               <SectionTitle>All Discovery Themes</SectionTitle>
@@ -95,7 +142,7 @@ export default function Home() {
         {data && (
           <div className="flex h-full flex-col p-6">
             <div className="flex-1 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm mb-4">
-              <ChatBot />
+              <ChatBot method={method} />
             </div>
             <footer className="text-xs text-gray-400">
               <strong>Facts only.</strong> Answers are derived directly from theme classification and keyword analysis of user reviews across 6 sources.
