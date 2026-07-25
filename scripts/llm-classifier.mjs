@@ -9,7 +9,7 @@
  *   5. If LLM succeeds → save to data/llm_classified_sample.json (no keyword fallback)
  *   6. If LLM fails → fall back to keyword classification for those 50
  *
- * Usage:  GROQ_API_KEY=... node scripts/llm-classifier.mjs
+ * Usage:  CLASSIFICATION_API_KEY=... node scripts/llm-classifier.mjs
  */
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -34,15 +34,15 @@ function loadEnv() {
 }
 loadEnv();
 
-const GROQ_API_KEY = process.env.GROQ_API_KEY;
+const GROQ_API_KEY = process.env.CLASSIFICATION_API_KEY;
 if (!GROQ_API_KEY) {
-  console.error("ERROR: GROQ_API_KEY not found in environment or .env.local");
+  console.error("ERROR: CLASSIFICATION_API_KEY not found in environment or .env.local");
   process.exit(1);
 }
 
 const MODEL = "llama-3.1-8b-instant";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-const SAMPLE_SIZE = 100;
+const SAMPLE_SIZE = 200;
 const MAX_RETRIES = 3;
 const RETRY_BASE_MS = 4000;
 

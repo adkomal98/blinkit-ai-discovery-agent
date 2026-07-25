@@ -14,7 +14,7 @@ const SAMPLE_QUESTIONS = [
   "What unmet needs emerge consistently across discussions?"
 ];
 
-export function ChatBot({ method = "keyword" }: { method?: "keyword" | "llm" }) {
+export function ChatBot({ method = "keyword", disabled = false }: { method?: "keyword" | "llm"; disabled?: boolean }) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -76,7 +76,10 @@ export function ChatBot({ method = "keyword" }: { method?: "keyword" | "llm" }) 
   }
 
   return (
-    <div className="flex h-full flex-col font-sans">
+    <div className="flex h-full flex-col font-sans relative">
+      {disabled && (
+        <div className="absolute inset-0 z-50 bg-white/50 backdrop-blur-[1px] cursor-not-allowed"></div>
+      )}
       {/* Header */}
       <div className="flex items-center gap-3 border-b border-blinkit-400 bg-blinkit-300 p-4">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-blinkit-500 shadow-sm">

@@ -58,15 +58,16 @@ export default function Home() {
 
         {error && <Card className="border-rose-200 bg-rose-50 text-sm text-rose-700 mb-4">{error}</Card>}
 
-        {!data && !error && !isClassifying && (
-          <Card className="text-center text-sm text-gray-500">Analysing multi-source Blinkit reviews for cross-category discovery signals…</Card>
-        )}
-
-        {isClassifying && (
-          <Card className="text-center text-sm text-gray-500">
-            <span className="animate-pulse">🧠 Please wait classifying 100 reviews... This might take about 20 seconds...</span>
-          </Card>
-        )}
+        {(!data && !error) || isClassifying ? (
+          <div className="flex flex-col items-center justify-center rounded-xl bg-gray-50/50 p-12 border border-gray-200">
+            <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200 border-t-blinkit-500 mb-4"></div>
+            <p className="text-sm font-medium text-gray-600 text-center animate-pulse">
+              {isClassifying
+                ? "Classify 200 reviews... This takes ~30s"
+                : "Analysing multi-source Blinkit reviews for cross-category discovery signals…"}
+            </p>
+          </div>
+        ) : null}
 
         {data && !isClassifying && (
           <div className="space-y-4">
@@ -139,16 +140,14 @@ export default function Home() {
 
       {/* RIGHT HALF */}
       <aside className="w-1/2 h-full flex flex-col bg-gray-50">
-        {data && (
-          <div className="flex h-full flex-col p-6">
-            <div className="flex-1 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm mb-4">
-              <ChatBot method={method} />
-            </div>
-            <footer className="text-xs text-gray-400">
-              <strong>Facts only.</strong> Answers are derived directly from theme classification and keyword analysis of user reviews across 6 sources.
-            </footer>
+        <div className="flex h-full flex-col p-6">
+          <div className="flex-1 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm mb-4">
+            <ChatBot method={method} disabled={!data || isClassifying} />
           </div>
-        )}
+          <footer className="text-xs text-gray-400">
+            <strong>Facts only.</strong> Answers are derived directly from theme classification and keyword analysis of user reviews across 6 sources.
+          </footer>
+        </div>
       </aside>
     </div>
   );

@@ -5,7 +5,7 @@ import { loadReviews } from "@/lib/reviews";
 
 const MODEL = "llama-3.1-8b-instant";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-const SAMPLE_SIZE = 100;
+const SAMPLE_SIZE = 200;
 const MAX_RETRIES = 3;
 const RETRY_BASE_MS = 4000;
 
@@ -107,9 +107,9 @@ async function callGroq(prompt: string, groqApiKey: string, attempt = 1): Promis
 
 export async function POST() {
   try {
-    const groqApiKey = process.env.GROQ_API_KEY;
+    const groqApiKey = process.env.CLASSIFICATION_API_KEY;
     if (!groqApiKey) {
-      return NextResponse.json({ error: "GROQ_API_KEY not configured on server" }, { status: 500 });
+      return NextResponse.json({ error: "CLASSIFICATION_API_KEY not configured on server" }, { status: 500 });
     }
 
     const root = process.cwd();

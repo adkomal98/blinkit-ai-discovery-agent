@@ -7,15 +7,17 @@ This project aggregates, classifies, and analyzes thousands of cross-platform us
 ## ✨ Features
 
 - **Automated Data Pipeline**: Scrapes public reviews from Google Play, App Store, and social platforms, parsing out PII and standardizing the schema.
-- **Hybrid Theme Classification**: A dual-engine classifier that uses Groq/Llama 3.1 LLM for nuanced classification of a 500-review sample, with deterministic keyword matching as fallback for all 20,000+ reviews. Categorizes into 5 strategic discovery themes.
-- **Discovery Pulse Dashboard**: A beautifully designed 50/50 split UI that presents a weekly summary of themes alongside real verbatim user quotes.
-- **AI FAQ Assistant (Gemini)**: An integrated chatbot that answers questions strictly based on the extracted offline dataset, preventing hallucinations and ensuring facts-only insights.
+- **Dual-Engine Classification**: Explore data through two distinct lenses:
+  - **Keyword Deterministic**: Fast, regex-based fallback engine that classifies all 20,000+ reviews.
+  - **Dynamic LLM Sampling**: An on-demand pipeline that hits Groq (Llama 3.1) to intelligently classify a random sample of 200 clean reviews, falling back gracefully on rate limits.
+- **Discovery Pulse Dashboard**: A beautifully designed split UI that lets you instantly toggle between the Full Dataset and the LLM Sample Dataset to compare theme distribution and real verbatim quotes.
+- **Context-Aware AI Assistant (Gemini)**: An integrated chatbot that answers questions strictly based on whichever dataset you currently have active, preventing hallucinations and ensuring facts-only insights.
 
 ## 🛠 Tech Stack
 
 - **Framework:** Next.js 14 (App Router), React 18
 - **Styling:** Tailwind CSS (with Typography plugin)
-- **AI Integration:** Google Gemini (`@google/generative-ai`)
+- **AI Integration:** Google Gemini (`@google/generative-ai`), Groq (Llama 3.1 8B)
 - **Data Scraping:** `google-play-scraper`, `app-store-scraper`, Puppeteer
 
 ## 🚀 Getting Started
@@ -26,24 +28,26 @@ npm install
 ```
 
 ### 2. Set Up Environment Variables
-Create a `.env.local` file in the root directory and add your Google Gemini API key:
+Create a `.env.local` file in the root directory and add your API keys:
 ```env
-GEMINI_API_KEY="your_api_key_here"
-GROQ_API_KEY="your_groq_api_key_here"
+CHATBOT_API_KEY="your_api_key_here"
+CLASSIFICATION_API_KEY="your_groq_api_key_here"
 ```
 
 ### 3. Fetch Data & Generate Insights
-Before running the app, you need to populate the data.
+Before running the app, you need to populate the base data.
 
 Fetch the latest reviews (this will pull up to 20,000 reviews from Google Play/App Store and merge manual web data):
 ```bash
 npm run fetch:reviews
 ```
 
-Categorize those reviews into the 5 strategic themes (runs LLM classifier first, then generates `artifacts/themes_summary.json`):
+Categorize those reviews using the deterministic keyword engine (generates `artifacts/themes_summary.json`):
 ```bash
 npm run generate:note
 ```
+
+*(Note: The LLM classification for the 200-review sample is triggered dynamically from the UI via the Next.js API, or manually via `npm run classify:llm`).*
 
 ### 4. Run the Development Server
 ```bash

@@ -47,15 +47,15 @@ ${JSON.stringify(contextData, null, 2)}
 `;
 
   // 3. Initialize Gemini
-  if (!process.env.GEMINI_API_KEY) {
-    console.error("Missing GEMINI_API_KEY environment variable");
+  if (!process.env.CHATBOT_API_KEY) {
+    console.error("Missing CHATBOT_API_KEY environment variable");
     return {
       answer: "Error: AI generation is currently unavailable because the API key is not configured.",
       sourceInfo: "System Error"
     };
   }
 
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+  const genAI = new GoogleGenerativeAI(process.env.CHATBOT_API_KEY);
   
   // Define response schema to enforce JSON output
   const responseSchema: Schema = {
