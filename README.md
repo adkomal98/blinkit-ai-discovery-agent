@@ -9,7 +9,7 @@ This project aggregates, classifies, and analyzes thousands of cross-platform us
 - **Automated Data Pipeline**: Scrapes public reviews from Google Play, App Store, and social platforms, parsing out PII and standardizing the schema.
 - **Dual-Engine Classification**: Explore data through two distinct lenses:
   - **Keyword Deterministic**: Fast, regex-based fallback engine that classifies all 20,000+ reviews.
-  - **Dynamic LLM Sampling**: An on-demand pipeline that hits Groq (Llama 3.1) to intelligently classify a random sample of 200 clean reviews, falling back gracefully on rate limits.
+  - **Dynamic LLM Sampling**: An on-demand pipeline that hits Groq (Llama 3.1) to intelligently classify a random sample of 100 clean reviews, falling back gracefully on rate limits.
 - **Discovery Pulse Dashboard**: A beautifully designed split UI that lets you instantly toggle between the Full Dataset and the LLM Sample Dataset to compare theme distribution and real verbatim quotes.
 - **Context-Aware AI Assistant (Gemini)**: An integrated chatbot that answers questions strictly based on whichever dataset you currently have active, preventing hallucinations and ensuring facts-only insights.
 
@@ -30,8 +30,8 @@ npm install
 ### 2. Set Up Environment Variables
 Create a `.env.local` file in the root directory and add your API keys:
 ```env
-CHATBOT_API_KEY="your_api_key_here"
-CLASSIFICATION_API_KEY="your_groq_api_key_here"
+CHATBOT_API_KEY="your_api_key_1_here"
+CLASSIFICATION_API_KEY="your__api_key_2_here"
 ```
 
 ### 3. Fetch Data & Generate Insights
@@ -47,7 +47,7 @@ Categorize those reviews using the deterministic keyword engine (generates `arti
 npm run generate:note
 ```
 
-*(Note: The LLM classification for the 200-review sample is triggered dynamically from the UI via the Next.js API, or manually via `npm run classify:llm`).*
+*(Note: The LLM classification for the 100-review sample is triggered dynamically from the UI via the Next.js API, or manually via `npm run classify:llm`).*
 
 ### 4. Run the Development Server
 ```bash

@@ -42,7 +42,7 @@ if (!GROQ_API_KEY) {
 
 const MODEL = "llama-3.1-8b-instant";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-const SAMPLE_SIZE = 200;
+const SAMPLE_SIZE = 100;
 const MAX_RETRIES = 3;
 const RETRY_BASE_MS = 4000;
 

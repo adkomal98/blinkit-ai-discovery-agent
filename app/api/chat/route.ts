@@ -19,7 +19,10 @@ export async function POST(req: Request) {
     let reviews = loadReviews();
 
     if (method === "llm") {
-      const llmPath = join(process.cwd(), "data", "llm_classified_sample.json");
+      const isVercel = process.env.VERCEL === "1";
+      const llmPath = isVercel 
+        ? "/tmp/llm_classified_sample.json" 
+        : join(process.cwd(), "data", "llm_classified_sample.json");
       if (existsSync(llmPath)) {
         const data = JSON.parse(readFileSync(llmPath, "utf8"));
         reviews = data.reviews;

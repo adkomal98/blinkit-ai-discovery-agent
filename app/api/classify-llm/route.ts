@@ -5,7 +5,7 @@ import { loadReviews } from "@/lib/reviews";
 
 const MODEL = "llama-3.1-8b-instant";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-const SAMPLE_SIZE = 200;
+const SAMPLE_SIZE = 100;
 const MAX_RETRIES = 3;
 const RETRY_BASE_MS = 4000;
 
@@ -199,7 +199,11 @@ Use ONLY the exact theme IDs listed above. Return ONLY the JSON array, nothing e
       reviews: classifiedReviews,
     };
 
-    const outPath = join(root, "data", "llm_classified_sample.json");
+    const isVercel = process.env.VERCEL === "1";
+    const outPath = isVercel 
+      ? "/tmp/llm_classified_sample.json" 
+      : join(root, "data", "llm_classified_sample.json");
+      
     writeFileSync(outPath, JSON.stringify(output, null, 2), "utf8");
 
     return NextResponse.json({ success: true, method: classificationMethod });
