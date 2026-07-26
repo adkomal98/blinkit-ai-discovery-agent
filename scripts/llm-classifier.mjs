@@ -314,27 +314,45 @@ async function main() {
     }
   }
 
-  // Step 5: Save to separate file
+  const outPath = join(ROOT, "data", "llm_classified_sample.json");
+  let finalReviews = [...classifiedReviews];
+
+  if (existsSync(outPath)) {
+    try {
+      const existingData = JSON.parse(readFileSync(outPath, "utf8"));
+      if (existingData && Array.isArray(existingData.reviews)) {
+        const newIds = new Set(finalReviews.map(r => r.review_id));
+        for (const oldReview of existingData.reviews) {
+          if (!newIds.has(oldReview.review_id)) {
+            finalReviews.push(oldReview);
+          }
+        }
+      }
+    } catch (err) {
+      console.warn("Failed to read existing LLM sample to append:", err);
+    }
+  }
+
+  // Step 5: Save to file
   const output = {
     generatedAt: new Date().toISOString(),
     model: classificationMethod === "llm" ? MODEL : "keyword_fallback",
     method: classificationMethod,
-    totalClassified: classifiedReviews.length,
-    reviews: classifiedReviews,
+    totalClassified: finalReviews.length,
+    reviews: finalReviews,
   };
 
-  const outPath = join(ROOT, "data", "llm_classified_sample.json");
   writeFileSync(outPath, JSON.stringify(output, null, 2), "utf8");
 
   // Print summary
   const dist = {};
-  for (const r of classifiedReviews) {
+  for (const r of finalReviews) {
     dist[r.theme_name] = (dist[r.theme_name] || 0) + 1;
   }
 
   console.log(`\n================================================`);
   console.log(`✅ Classification complete! (Method: ${classificationMethod})`);
-  console.log(`   Total: ${classifiedReviews.length} reviews`);
+  console.log(`   Total: ${finalReviews.length} reviews in pool`);
   console.log(`   Saved to: ${outPath}`);
   console.log(`\n📊 Theme distribution:`);
   for (const [name, count] of Object.entries(dist).sort((a, b) => b[1] - a[1])) {

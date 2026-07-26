@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { loadReviews } from "@/lib/reviews";
 
@@ -191,18 +191,36 @@ Use ONLY the exact theme IDs listed above. Return ONLY the JSON array, nothing e
       }
     }
 
-    const output = {
-      generatedAt: new Date().toISOString(),
-      model: classificationMethod === "llm" ? MODEL : "keyword_fallback",
-      method: classificationMethod,
-      totalClassified: classifiedReviews.length,
-      reviews: classifiedReviews,
-    };
-
     const isVercel = process.env.VERCEL === "1";
     const outPath = isVercel 
       ? "/tmp/llm_classified_sample.json" 
       : join(root, "data", "llm_classified_sample.json");
+
+    let finalReviews = [...classifiedReviews];
+
+    if (existsSync(outPath)) {
+      try {
+        const existingData = JSON.parse(readFileSync(outPath, "utf8"));
+        if (existingData && Array.isArray(existingData.reviews)) {
+          const newIds = new Set(finalReviews.map(r => r.review_id));
+          for (const oldReview of existingData.reviews) {
+            if (!newIds.has(oldReview.review_id)) {
+              finalReviews.push(oldReview);
+            }
+          }
+        }
+      } catch (err) {
+        console.warn("Failed to read existing LLM sample to append:", err);
+      }
+    }
+
+    const output = {
+      generatedAt: new Date().toISOString(),
+      model: classificationMethod === "llm" ? MODEL : "keyword_fallback",
+      method: classificationMethod,
+      totalClassified: finalReviews.length,
+      reviews: finalReviews,
+    };
       
     writeFileSync(outPath, JSON.stringify(output, null, 2), "utf8");
 

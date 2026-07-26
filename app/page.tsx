@@ -63,7 +63,7 @@ export default function Home() {
             <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200 border-t-blinkit-500 mb-4"></div>
             <p className="text-sm font-medium text-gray-600 text-center animate-pulse">
               {isClassifying
-                ? "Classify 100 reviews... This takes ~20s"
+                ? "Classifying 100 reviews... This will take ~20s"
                 : "Analysing multi-source Blinkit reviews for cross-category discovery signals…"}
             </p>
           </div>

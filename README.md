@@ -9,7 +9,7 @@ This project aggregates, classifies, and analyzes thousands of cross-platform us
 - **Automated Data Pipeline**: Scrapes public reviews from Google Play, App Store, and social platforms, parsing out PII and standardizing the schema.
 - **Dual-Engine Classification**: Explore data through two distinct lenses:
   - **Keyword Deterministic**: Fast, regex-based fallback engine that classifies all 20,000+ reviews.
-  - **Dynamic LLM Sampling**: An on-demand pipeline that hits Groq (Llama 3.1) to intelligently classify a random sample of 100 clean reviews, falling back gracefully on rate limits.
+  - **Dynamic LLM Sampling**: An on-demand pipeline that hits Groq (Llama 3.1) to intelligently classify a random batch of 100 clean reviews. Each run is additive and deduplicated, steadily growing your high-fidelity LLM dataset.
 - **Discovery Pulse Dashboard**: A beautifully designed split UI that lets you instantly toggle between the Full Dataset and the LLM Sample Dataset to compare theme distribution and real verbatim quotes.
 - **Context-Aware AI Assistant (Gemini)**: An integrated chatbot that answers questions strictly based on whichever dataset you currently have active, preventing hallucinations and ensuring facts-only insights.
 
@@ -47,7 +47,7 @@ Categorize those reviews using the deterministic keyword engine (generates `arti
 npm run generate:note
 ```
 
-*(Note: The LLM classification for the 100-review sample is triggered dynamically from the UI via the Next.js API, or manually via `npm run classify:llm`).*
+*(Note: Triggering the LLM classification from the UI or via `npm run classify:llm` will pull a new random batch of 100 reviews and append it to your existing LLM dataset).*
 
 ### 4. Run the Development Server
 ```bash
