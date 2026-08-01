@@ -208,7 +208,7 @@ Use ONLY the exact theme IDs listed above. Return ONLY the JSON array, nothing e
 // ---------- Deterministic sampling ----------
 function sampleReviews(cleanReviews, n) {
   const shuffled = [...cleanReviews];
-  let seed = 42;
+  let seed = Date.now();
   function seededRandom() {
     seed = (seed * 16807) % 2147483647;
     return (seed - 1) / 2147483646;
@@ -225,6 +225,21 @@ async function main() {
   console.log("🧠 LLM Theme Classifier (Groq / Llama 3.1 8B)");
   console.log("================================================\n");
 
+  const outPath = join(ROOT, "data", "llm_classified_sample.json");
+  let existingReviews = [];
+  if (existsSync(outPath)) {
+    try {
+      const existingData = JSON.parse(readFileSync(outPath, "utf8"));
+      if (existingData && Array.isArray(existingData.reviews)) {
+        existingReviews = existingData.reviews;
+      }
+    } catch (err) {
+      console.warn("Failed to read existing LLM sample:", err);
+    }
+  }
+
+  const existingIds = new Set(existingReviews.map(r => r.review_id));
+
   // Step 1: Load reviews
   const allReviews = loadReviews();
   console.log(`📄 Loaded ${allReviews.length} total reviews from CSV`);
@@ -233,11 +248,21 @@ async function main() {
   const cleanReviews = allReviews.filter(isClean);
   console.log(`🧹 After noise removal: ${cleanReviews.length} clean reviews`);
 
-  // Step 3: Sample 50
-  const sample = sampleReviews(cleanReviews, SAMPLE_SIZE);
-  console.log(`🎯 Sampled ${sample.length} reviews for LLM classification\n`);
+  // Step 3: Filter unclassified reviews
+  const unclassifiedReviews = cleanReviews.filter(r => !existingIds.has(r.review_id));
+  console.log(`🔍 Existing classified reviews: ${existingReviews.length}`);
+  console.log(`✨ Remaining unclassified clean reviews: ${unclassifiedReviews.length}`);
 
-  // Step 4: Send 1 batch of 50 to Groq
+  if (unclassifiedReviews.length === 0) {
+    console.log("🎉 All clean reviews have already been classified!");
+    return;
+  }
+
+  // Step 4: Sample
+  const sample = sampleReviews(unclassifiedReviews, SAMPLE_SIZE);
+  console.log(`🎯 Sampled ${sample.length} new reviews for LLM classification\n`);
+
+  // Step 5: Send 1 batch to Groq
   let classificationMethod = "keyword_fallback";
   const classifiedReviews = [];
 
@@ -314,26 +339,9 @@ async function main() {
     }
   }
 
-  const outPath = join(ROOT, "data", "llm_classified_sample.json");
-  let finalReviews = [...classifiedReviews];
+  const finalReviews = [...existingReviews, ...classifiedReviews];
 
-  if (existsSync(outPath)) {
-    try {
-      const existingData = JSON.parse(readFileSync(outPath, "utf8"));
-      if (existingData && Array.isArray(existingData.reviews)) {
-        const newIds = new Set(finalReviews.map(r => r.review_id));
-        for (const oldReview of existingData.reviews) {
-          if (!newIds.has(oldReview.review_id)) {
-            finalReviews.push(oldReview);
-          }
-        }
-      }
-    } catch (err) {
-      console.warn("Failed to read existing LLM sample to append:", err);
-    }
-  }
-
-  // Step 5: Save to file
+  // Save to file
   const output = {
     generatedAt: new Date().toISOString(),
     model: classificationMethod === "llm" ? MODEL : "keyword_fallback",

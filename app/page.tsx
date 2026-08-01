@@ -14,13 +14,21 @@ export default function Home() {
 
   const [method, setMethod] = useState<"keyword" | "llm">("keyword");
 
+  const loadAnalysis = async (m: "keyword" | "llm") => {
+    try {
+      const r = await fetch(`/api/analyze?method=${m}`);
+      const d = await r.json();
+      if (d.error) setError(d.error);
+      else setData(d);
+    } catch {
+      setError("Could not load analysis.");
+    }
+  };
+
   useEffect(() => {
     setData(null);
     setError(null);
-    fetch(`/api/analyze?method=${method}`)
-      .then((r) => r.json())
-      .then((d) => (d.error ? setError(d.error) : setData(d)))
-      .catch(() => setError("Could not load analysis."));
+    loadAnalysis(method);
   }, [method]);
 
   async function triggerLlmClassification() {
@@ -28,9 +36,10 @@ export default function Home() {
     setError(null);
     try {
       const res = await fetch("/api/classify-llm", { method: "POST" });
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
+      const resData = await res.json();
+      if (resData.error) throw new Error(resData.error);
       setMethod("llm");
+      await loadAnalysis("llm");
     } catch (e: any) {
       setError(e.message || "Failed to run LLM classification.");
     } finally {

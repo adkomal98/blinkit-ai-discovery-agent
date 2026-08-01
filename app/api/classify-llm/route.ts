@@ -117,9 +117,37 @@ export async function POST() {
     const THEME_IDS = legend.themes.map((t: any) => t.id);
     const FALLBACK_ID = legend.fallback.id;
 
+    const isVercel = process.env.VERCEL === "1";
+    const outPath = isVercel 
+      ? "/tmp/llm_classified_sample.json" 
+      : join(root, "data", "llm_classified_sample.json");
+
+    let existingReviews: any[] = [];
+    if (existsSync(outPath)) {
+      try {
+        const existingData = JSON.parse(readFileSync(outPath, "utf8"));
+        if (existingData && Array.isArray(existingData.reviews)) {
+          existingReviews = existingData.reviews;
+        }
+      } catch (err) {
+        console.warn("Failed to read existing LLM sample:", err);
+      }
+    }
+
+    const existingIds = new Set(existingReviews.map((r: any) => r.review_id));
     const allReviews = loadReviews();
     const cleanReviews = allReviews.filter(isClean);
-    const sample = sampleReviews(cleanReviews, SAMPLE_SIZE);
+    const unclassifiedReviews = cleanReviews.filter((r: any) => !existingIds.has(r.review_id));
+
+    if (unclassifiedReviews.length === 0) {
+      return NextResponse.json({
+        success: true,
+        message: "All clean reviews have already been classified.",
+        totalClassified: existingReviews.length,
+      });
+    }
+
+    const sample = sampleReviews(unclassifiedReviews, SAMPLE_SIZE);
 
     const themeDescriptions = legend.themes
       .map((t: any) => `- "${t.id}": ${t.name} — ${t.blurb}`)
@@ -191,28 +219,7 @@ Use ONLY the exact theme IDs listed above. Return ONLY the JSON array, nothing e
       }
     }
 
-    const isVercel = process.env.VERCEL === "1";
-    const outPath = isVercel 
-      ? "/tmp/llm_classified_sample.json" 
-      : join(root, "data", "llm_classified_sample.json");
-
-    let finalReviews = [...classifiedReviews];
-
-    if (existsSync(outPath)) {
-      try {
-        const existingData = JSON.parse(readFileSync(outPath, "utf8"));
-        if (existingData && Array.isArray(existingData.reviews)) {
-          const newIds = new Set(finalReviews.map(r => r.review_id));
-          for (const oldReview of existingData.reviews) {
-            if (!newIds.has(oldReview.review_id)) {
-              finalReviews.push(oldReview);
-            }
-          }
-        }
-      } catch (err) {
-        console.warn("Failed to read existing LLM sample to append:", err);
-      }
-    }
+    const finalReviews = [...existingReviews, ...classifiedReviews];
 
     const output = {
       generatedAt: new Date().toISOString(),
@@ -224,7 +231,12 @@ Use ONLY the exact theme IDs listed above. Return ONLY the JSON array, nothing e
       
     writeFileSync(outPath, JSON.stringify(output, null, 2), "utf8");
 
-    return NextResponse.json({ success: true, method: classificationMethod });
+    return NextResponse.json({
+      success: true,
+      method: classificationMethod,
+      addedCount: classifiedReviews.length,
+      totalClassified: finalReviews.length,
+    });
   } catch (e: any) {
     console.error("API error during classify-llm:", e);
     return NextResponse.json({ error: e.message || "Failed to run LLM classification" }, { status: 500 });

@@ -35,8 +35,8 @@ the single source of truth). Themes are designed specifically for cross-category
 3 concrete cross-category growth ideas, hard-capped at **250 words**.
 
 ### Phase 5: Validation Check
-An **Interactive FAQ Chatbot** (`components/ChatBot.tsx`) lets product managers query the discovery insights directly.
-Following the FAQ assistant pattern, it uses regex-based pattern matching on the thematic analysis data to answer questions about barriers, behaviors, and segments — supporting its answers with real user quotes and source metrics.
+An **Interactive Discovery Insights Assistant** (`components/ChatBot.tsx` & `lib/chatbot.ts`) lets product managers query discovery insights directly.
+Powered by **Google Gemini (`gemini-3.6-flash`)**, it uses a structured output JSON schema and grounds all answers strictly in the active dataset's thematic analysis context — generating data-backed answers supported by real user quotes and source metrics while preventing hallucinations.
 
 ## Discovery Questions Addressed
 

@@ -11,7 +11,25 @@ This project aggregates, classifies, and analyzes thousands of cross-platform us
   - **Keyword Deterministic**: Fast, regex-based fallback engine that classifies all 20,000+ reviews.
   - **Dynamic LLM Sampling**: An on-demand pipeline that hits Groq (Llama 3.1) to intelligently classify a random batch of 100 clean reviews. Each run is additive and deduplicated, steadily growing your high-fidelity LLM dataset.
 - **Discovery Pulse Dashboard**: A beautifully designed split UI that lets you instantly toggle between the Full Dataset and the LLM Sample Dataset to compare theme distribution and real verbatim quotes.
-- **Context-Aware AI Assistant (Gemini)**: An integrated chatbot that answers questions strictly based on whichever dataset you currently have active, preventing hallucinations and ensuring facts-only insights.
+- **Discovery Insights Assistant (Gemini LLM)**: Powered by Google Gemini (`gemini-3.6-flash`) with structured JSON schema outputs, this interactive assistant dynamically analyzes the active dataset context to answer questions on cross-category barriers, user segments, and shopping habits with zero hallucinations and real quote citations.
+
+## 🏗 Architecture Flow
+
+```mermaid
+flowchart TD
+    A[User clicks 'Sample Dataset (Live API)'] --> B[app/page.tsx: triggerLlmClassification]
+    B --> C[POST /api/classify-llm]
+    C --> D[Read existing reviews from data/llm_classified_sample.json]
+    D --> E[Filter unclassified clean reviews]
+    E --> F[Sample 100 new reviews]
+    F --> G[Groq API: Llama 3.1 8B batch classification]
+    G --> H[Append new reviews to existing dataset]
+    H --> I[Write back to data/llm_classified_sample.json]
+    I --> J[Frontend: await loadAnalysis('llm')]
+    J --> K[GET /api/analyze?method=llm]
+    K --> L[Re-summarise themes & quotes from total dataset]
+    L --> M[UI updates dynamically & Discovery Insights Assistant uses expanded dataset]
+```
 
 ## 🛠 Tech Stack
 
@@ -57,7 +75,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## 📁 Project Structure
 
-- `/app` - Next.js App Router pages and API routes (including the Chatbot API).
+- `/app` - Next.js App Router pages and API routes (including the Discovery Insights Assistant API at `/api/chat` using Gemini LLM).
 - `/components` - Reusable UI components (Theme Cards, ChatBot, Quotes).
 - `/lib` - Core logic for categorization, noise-filtering, and AI prompts.
 - `/scripts` - Offline Node.js scripts for scraping and data generation.

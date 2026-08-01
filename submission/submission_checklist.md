@@ -8,7 +8,7 @@
 - [x] Real user quotes selected deterministically
 - [x] Concrete, shippable action ideas for the Growth Team
 - [x] All PII removed (names, emails, phones, IDs)
-- [x] Interactive FAQ Chatbot for querying insights
+- [x] Interactive Discovery Insights Assistant (Gemini LLM) for querying insights
 
 ## Discovery Engine — 5 Phases
 
